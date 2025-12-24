@@ -7,8 +7,8 @@ using RussianCuisine.DTOs;
 
 namespace RussianCuisine.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class RestaurantsController : ControllerBase
     {
         private readonly RussianCuisineDbContext _context;
@@ -19,49 +19,65 @@ namespace RussianCuisine.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<RestaurantPreviewDto>>> GetRestaurants()
+        public async Task<ActionResult<List<RestaurantDto>>> GetRestaurants()
         {
-            var restaurants = await _context.Restaurants.Include(r => r.MenuItems).Where(r => (bool)!r.IsDeleted).Select((r) => new RestaurantPreviewDto
+            var restaurants = await _context.Restaurants.Where((r) => (bool)!r.IsDeleted).ToListAsync();
+
+            var result = restaurants.Select(r => new RestaurantDto
             {
                 Id = r.RestaurantId,
                 Name = r.Name,
+                Description = r.Description,
                 Address = r.Address,
-                Phone = r.Phone
-            }).ToListAsync();
+                Phone = r.Phone,
+                OpeningHours = r.OpeningHours,
+                WebsiteUrl = r.WebsiteUrl,
+                Menu = r.MenuItems.Where(m => (bool)m.IsAvailable && (bool)!m.IsDeleted)
+                .Select(m => new MenuItemDto
+                {
+                    Id = m.MenuItemId,
+                    Name = m.Name,
+                    Price = m.Price,
+                    Category = m.Category,
+                    ImageUrl = m.ImageUrl
+                }).ToList()
+            }).ToList();
 
-            return Ok(restaurants);
+            return Ok(result);
         }
 
-        // GET: api/<RestaurantsController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<RestaurantsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<RestaurantDto>> GetRestaurant(int id)
         {
-            return "value";
-        }
+            var restaurant = await _context.Restaurants
+                .Include(r => r.MenuItems)
+                .FirstOrDefaultAsync(r => r.RestaurantId == id && (bool)!r.IsDeleted);
 
-        // POST api/<RestaurantsController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+            if (restaurant == null)
+                return NotFound();
 
-        // PUT api/<RestaurantsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+            var result = new RestaurantDto
+            {
+                Id = restaurant.RestaurantId,
+                Name = restaurant.Name,
+                Description = restaurant.Description,
+                Address = restaurant.Address,
+                Phone = restaurant.Phone,
+                OpeningHours = restaurant.OpeningHours,
+                WebsiteUrl = restaurant.WebsiteUrl,
+                Menu = restaurant.MenuItems
+                    .Where(m => (bool)m.IsAvailable && (bool)!m.IsDeleted)
+                    .Select(m => new MenuItemDto
+                    {
+                        Id = m.MenuItemId,
+                        Name = m.Name,
+                        Price = m.Price,
+                        Category = m.Category,
+                        ImageUrl = m.ImageUrl
+                    }).ToList()
+            };
 
-        // DELETE api/<RestaurantsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return Ok(result);
         }
     }
 }

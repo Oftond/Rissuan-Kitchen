@@ -1,43 +1,88 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using RussianCuisine.Data;
+using RussianCuisine.DTOs;
+using RussianCuisine.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace RussianCuisine.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class ReviewsController : ControllerBase
     {
-        // GET: api/<ReviewsController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly RussianCuisineDbContext _context;
+
+        public ReviewsController(RussianCuisineDbContext context)
         {
-            return new string[] { "value1", "value2" };
+            _context = context;
         }
 
-        // GET api/<ReviewsController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("restaurant/{restaurantId}")]
+        public async Task<ActionResult<List<ReviewDto>>> GetReviews(int restaurantId)
         {
-            return "value";
+            var restaurantExists = await _context.Restaurants
+                .AnyAsync(r => r.RestaurantId == restaurantId && (bool)!r.IsDeleted);
+
+            if (!restaurantExists)
+                return NotFound("Restaurant not found");
+
+            var reviews = await _context.Reviews
+                .Where(r => r.RestaurantId == restaurantId && (bool)!r.IsDeleted)
+                .OrderByDescending(r => r.CreatedAt)
+                .ToListAsync();
+
+            var result = reviews.Select(r => new ReviewDto
+            {
+                Id = r.ReviewId,
+                AuthorName = r.AuthorName ?? "Аноним",
+                Rating = r.Rating,
+                Comment = r.Comment,
+                CreatedAt = r.CreatedAt
+            }).ToList();
+
+            return Ok(result);
         }
 
-        // POST api/<ReviewsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<ReviewDto>> CreateReview(CreateReviewDto dto)
         {
-        }
+            if (dto.Rating < 1 || dto.Rating > 5)
+                return BadRequest("Rating must be between 1 and 5");
 
-        // PUT api/<ReviewsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+            if (string.IsNullOrWhiteSpace(dto.Comment))
+                return BadRequest("Comment is required");
 
-        // DELETE api/<ReviewsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            var restaurantExists = await _context.Restaurants
+                .AnyAsync(r => r.RestaurantId == dto.RestaurantId && (bool)!r.IsDeleted);
+
+            if (!restaurantExists)
+                return BadRequest("Invalid restaurant ID");
+
+            var review = new Review
+            {
+                RestaurantId = dto.RestaurantId,
+                AuthorName = string.IsNullOrWhiteSpace(dto.AuthorName) ? null : dto.AuthorName,
+                Rating = dto.Rating,
+                Comment = dto.Comment,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            _context.Reviews.Add(review);
+            await _context.SaveChangesAsync();
+
+            var result = new ReviewDto
+            {
+                Id = review.ReviewId,
+                AuthorName = review.AuthorName ?? "Аноним",
+                Rating = review.Rating,
+                Comment = review.Comment,
+                CreatedAt = review.CreatedAt
+            };
+
+            return CreatedAtAction(nameof(GetReviews), new { restaurantId = dto.RestaurantId }, result);
         }
     }
 }
