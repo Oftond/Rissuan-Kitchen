@@ -9,7 +9,6 @@ const RestaurantDetail = () => {
   const navigate = useNavigate();
   const [restaurant, setRestaurant] = useState(null);
   const [cart, setCart] = useState(() => {
-    // Загружаем корзину из localStorage
     const savedCart = localStorage.getItem('cart');
     return savedCart ? JSON.parse(savedCart) : [];
   });
@@ -24,7 +23,6 @@ const RestaurantDetail = () => {
   }, [id, navigate]);
 
   useEffect(() => {
-    // Сохраняем корзину в localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 

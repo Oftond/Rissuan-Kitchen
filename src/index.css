@@ -1363,6 +1363,7 @@ textarea.form-control {
 
   .main-map-container {
     height: 300px; /* Уменьшили высоту */
+    width: 300px;
   }
 
   .map-restaurants-sidebar {

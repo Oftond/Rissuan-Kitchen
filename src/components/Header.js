@@ -7,9 +7,6 @@ const Header = () => {
   return (
     <header>
       <div className="container header-container">
-        <Link to="/" className="logo" style={{fontSize: '20px', fontWeight: '700', color: '#8B0000'}}>
-          RussianFood
-        </Link>
         <ul className={`nav-menu ${menuOpen ? 'active' : ''}`}>
           <li><Link to="/" onClick={() => setMenuOpen(false)}>Главная</Link></li>
           <li><Link to="/map" onClick={() => setMenuOpen(false)}>Карта</Link></li>

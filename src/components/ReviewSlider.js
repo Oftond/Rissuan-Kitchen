@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { getStarsHTML } from '../utils/helpers';
 
 const ReviewSlider = ({ reviews, restaurants }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -9,15 +8,27 @@ const ReviewSlider = ({ reviews, restaurants }) => {
     return restaurant ? restaurant.name : 'Ресторан';
   };
 
+  const getStars = (rating) => {
+    let stars = '';
+    for (let i = 0; i < 5; i++) {
+      stars += i < rating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>';
+    }
+    return { __html: stars };
+  };
+
   const nextSlide = () => {
     if (currentSlide < reviews.length - 1) {
       setCurrentSlide(currentSlide + 1);
+    } else {
+      setCurrentSlide(0);
     }
   };
 
   const prevSlide = () => {
     if (currentSlide > 0) {
       setCurrentSlide(currentSlide - 1);
+    } else {
+      setCurrentSlide(reviews.length - 1);
     }
   };
 
@@ -32,22 +43,46 @@ const ReviewSlider = ({ reviews, restaurants }) => {
                 <div className="review-author">
                   <h4>{review.author_name}</h4>
                   <p>{getRestaurantName(review.restaurant_id)}</p>
-                  <div className="testimonial-rating">
-                    <div dangerouslySetInnerHTML={{__html: getStarsHTML(review.rating)}}></div>
-                  </div>
                 </div>
               </div>
               <div className="review-text">{review.text}</div>
+              <div className="testimonial-rating" dangerouslySetInnerHTML={getStars(review.rating)}></div>
             </div>
           </div>
         ))}
       </div>
-      <div className="slider-controls">
-        <button className="slider-btn" onClick={prevSlide}>
-          <i className="fas fa-chevron-left"></i>
+
+      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', marginTop: '20px'}}>
+        <button 
+          onClick={prevSlide}
+          style={{
+            background: 'none',
+            border: 'none',
+            fontSize: '28px',
+            color: '#8B0000',
+            cursor: 'pointer',
+            padding: '5px'
+          }}
+        >
+          ‹
         </button>
-        <button className="slider-btn" onClick={nextSlide}>
-          <i className="fas fa-chevron-right"></i>
+        
+        <span style={{color: '#666'}}>
+          {currentSlide + 1} / {reviews.length}
+        </span>
+        
+        <button 
+          onClick={nextSlide}
+          style={{
+            background: 'none',
+            border: 'none',
+            fontSize: '28px',
+            color: '#8B0000',
+            cursor: 'pointer',
+            padding: '5px'
+          }}
+        >
+          ›
         </button>
       </div>
     </div>

@@ -10,7 +10,7 @@ export const mockRestaurants = [
     phone: "+86 10 1234 5678",
     working_hours: "10:00-22:00",
     description: "Ресторан с традиционной русской кухней в современной интерпретации.",
-    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://share.google/UFsYpopS0JqSPpSWS"
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ export const mockRestaurants = [
     phone: "+86 21 8765 4321",
     working_hours: "11:00-23:00",
     description: "Аутентичная русская кухня в уютной атмосфере домашнего уюта.",
-    image: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://share.google/UFsYpopS0JqSPpSWS"
   },
   {
     id: 3,
@@ -36,7 +36,7 @@ export const mockRestaurants = [
     phone: "+86 20 5555 6666",
     working_hours: "09:00-21:00",
     description: "Современный ресторан с блюдами русской и европейской кухни.",
-    image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://share.google/UFsYpopS0JqSPpSWS"
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ export const mockRestaurants = [
     phone: "+86 10 2345 6789",
     working_hours: "11:00-23:00",
     description: "Классическая русская кухня в традиционной обстановке.",
-    image: "https://images.unsplash.com/photo-1554679665-f5537f187268?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://share.google/UFsYpopS0JqSPpSWS"
   },
   {
     id: 5,
@@ -62,7 +62,7 @@ export const mockRestaurants = [
     phone: "+86 21 9876 5432",
     working_hours: "10:00-22:00",
     description: "Ресторан сибирской кухни с акцентом на мясные блюда и выпечку.",
-    image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://share.google/UFsYpopS0JqSPpSWS"
   },
   {
     id: 6,
@@ -75,7 +75,7 @@ export const mockRestaurants = [
     phone: "+86 755 1111 2222",
     working_hours: "12:00-24:00",
     description: "Современный ресторан русской кухни с живой музыкой.",
-    image: "https://images.unsplash.com/photo-1565299507177-b0ac66763828?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://share.google/UFsYpopS0JqSPpSWS"
   },
   {
     id: 7,
@@ -88,7 +88,7 @@ export const mockRestaurants = [
     phone: "+86 20 3333 4444",
     working_hours: "08:00-20:00",
     description: "Уютное кафе с домашней русской кухней и свежей выпечкой.",
-    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://share.google/UFsYpopS0JqSPpSWS"
   },
   {
     id: 8,
@@ -101,7 +101,7 @@ export const mockRestaurants = [
     phone: "+86 10 3456 7890",
     working_hours: "09:00-21:00",
     description: "Традиционный русский ресторан с самоварами.",
-    image: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://share.google/UFsYpopS0JqSPpSWS"
   },
   {
     id: 9,
@@ -114,7 +114,7 @@ export const mockRestaurants = [
     phone: "+86 21 1111 2222",
     working_hours: "08:00-20:00",
     description: "Пироги и выпечка по домашним рецептам.",
-    image: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://share.google/UFsYpopS0JqSPpSWS"
   },
   {
     id: 10,
@@ -127,7 +127,7 @@ export const mockRestaurants = [
     phone: "+86 755 3333 4444",
     working_hours: "11:00-23:00",
     description: "Ресторан охотничьей кухни с дичью и грибами.",
-    image: "https://images.unsplash.com/photo-1578474846511-04ba529f0b88?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://share.google/UFsYpopS0JqSPpSWS"
   }
 ];
 

@@ -51,7 +51,6 @@ const Cart = ({ cart, restaurantName, setCart }) => {
     showModal('Заказ оформлен', 
       `Ваш заказ на сумму ${formatPrice(total)} успешно оформлен!\nС вами свяжутся в течение 15 минут для подтверждения.`,
       () => {
-        // Очищаем корзину после оформления
         setCart(cart.filter(item => item.restaurant !== restaurantName));
       }
     );

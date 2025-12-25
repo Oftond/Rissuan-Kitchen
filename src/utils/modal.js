@@ -1,5 +1,4 @@
 export const showModal = (title, message) => {
-  // Создаем backdrop
   const backdrop = document.createElement('div');
   backdrop.className = 'modal-backdrop';
   backdrop.style.cssText = `
@@ -15,7 +14,6 @@ export const showModal = (title, message) => {
     justify-content: center;
   `;
   
-  // Создаем модальное окно
   const modal = document.createElement('div');
   modal.className = 'modal-content';
   modal.style.cssText = `
@@ -46,15 +44,13 @@ export const showModal = (title, message) => {
   
   backdrop.appendChild(modal);
   document.body.appendChild(backdrop);
-  document.body.style.overflow = 'hidden'; // Блокируем скролл
-  
-  // Закрытие по клику на кнопку
+  document.body.style.overflow = 'hidden'; 
+
   document.getElementById('modalClose').onclick = () => {
     document.body.removeChild(backdrop);
     document.body.style.overflow = 'auto';
   };
   
-  // Закрытие по клику на backdrop
   backdrop.onclick = (e) => {
     if (e.target === backdrop) {
       document.body.removeChild(backdrop);
@@ -62,7 +58,6 @@ export const showModal = (title, message) => {
     }
   };
   
-  // Закрытие по Escape
   const handleEscape = (e) => {
     if (e.key === 'Escape') {
       document.body.removeChild(backdrop);
