@@ -1,0 +1,28 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  return (
+    <header>
+      <div className="container header-container">
+        <Link to="/" className="logo" style={{fontSize: '20px', fontWeight: '700', color: '#8B0000'}}>
+          RussianFood
+        </Link>
+        <ul className={`nav-menu ${menuOpen ? 'active' : ''}`}>
+          <li><Link to="/" onClick={() => setMenuOpen(false)}>Главная</Link></li>
+          <li><Link to="/map" onClick={() => setMenuOpen(false)}>Карта</Link></li>
+          <li><Link to="/restaurants" onClick={() => setMenuOpen(false)}>Рестораны</Link></li>
+          <li><Link to="/reviews" onClick={() => setMenuOpen(false)}>Отзывы</Link></li>
+          <li><Link to="/about" onClick={() => setMenuOpen(false)}>О нас</Link></li>
+        </ul>
+        <button className="mobile-menu-btn" onClick={() => setMenuOpen(!menuOpen)}>
+          <i className={menuOpen ? 'fas fa-times' : 'fas fa-bars'}></i>
+        </button>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
