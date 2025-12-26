@@ -1,0 +1,6 @@
+@RussianKitchen_HostAddress = http://localhost:5095
+
+GET {{RussianKitchen_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
