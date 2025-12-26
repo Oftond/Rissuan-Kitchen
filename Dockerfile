@@ -1,26 +1,32 @@
-# Этап 1 Сборка
-FROM mcr.microsoft.comdotnetsdk8.0 AS build
-WORKDIR src
+# Этап сборки
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
-# Копируем файлы проекта
-COPY .sln .
-COPY RussianKitchen.csproj .RussianKitchen
+# Рабочая директория — корень решения
+WORKDIR /src
+
+# Копируем .sln и csproj для восстановления зависимостей
+COPY RussianKitchen.sln .
+COPY RussianKitchen/RussianKitchen.csproj ./RussianKitchen/
 
 # Восстанавливаем зависимости
-RUN dotnet restore
+RUN dotnet restore RussianKitchen.sln
 
-# Копируем весь код
-COPY RussianKitchen. .RussianKitchen
+# Копируем весь исходный код
+COPY RussianKitchen/ ./RussianKitchen/
 
-# Собираем релиз
-WORKDIR srcRussianKitchen
-RUN dotnet publish -c Release -o apppublish
+# Собираем и публикуем
+WORKDIR /src/RussianKitchen
+RUN dotnet publish -c Release -o /app/publish
 
-# Этап 2 Запуск
-FROM mcr.microsoft.comdotnetaspnet8.0 AS final
-WORKDIR app
-COPY --from=build apppublish .
+# Этап запуска
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 
-# Запускаем приложение
+WORKDIR /app
+COPY --from=build /app/publish .
 
-ENTRYPOINT [dotnet, RussianKitchen.dll]
+# Порт (опционально, но рекомендуется)
+EXPOSE 8080
+ENV ASPNETCORE_URLS=http://+:8080
+
+# Запуск
+ENTRYPOINT ["dotnet", "RussianKitchen.dll"]
