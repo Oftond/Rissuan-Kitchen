@@ -8,13 +8,31 @@ import { mockRestaurants } from '../data/mockData';
 const Home = () => {
   const navigate = useNavigate();
 
+const goToRestaurants = () => {
+    navigate('/restaurants');
+  };
+
   return (
     <div>
       <section className="hero">
+        <div className="hero-bg-image"></div>        
+        <div className="hero-bg-image2"></div>
+
+        <div className="hero-overlay"></div>
+        
         <div className="container">
           <div className="hero-content">
-            <h1>СКУЧАЕШЬ ПО ВКУСУ ДОМА?</h1>
+            <h1>СКУЧАЕШЬ ПО ВКУСУ ДОМА?</h1>    
             <p>Найди свою русскую кухню в китае!</p>
+            <div className="hero-button-container">
+              <button 
+                className="hero-btn"
+                onClick={goToRestaurants}
+              >
+                <i className="fas fa-utensils" style={{marginRight: '10px'}}></i>
+                Поиск ресторана
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -25,7 +43,7 @@ const Home = () => {
           <p className="section-subtitle">Больше не нужно искать! Мы собрали все для тебя:</p>
           <div className="features-grid">
             <FeatureCard 
-              icon="fas fa-map-marked-alt"
+              icon="../images/rev.png"  
               title="Точная карта"
               description="Все рестораны русской кухни на одной карте"
             />

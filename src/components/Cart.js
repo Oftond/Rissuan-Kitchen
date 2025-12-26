@@ -12,7 +12,7 @@ const Cart = ({ cart, restaurantName, setCart }) => {
   const total = discount > 0 ? Math.floor(subtotal * (1 - discount)) : subtotal;
 
   const formatPrice = (price) => {
-    return price.toLocaleString('ru-RU') + '₽';
+    return price.toLocaleString('ru-RU') + 'р';
   };
 
   const removeFromCart = (itemName) => {
@@ -57,65 +57,48 @@ const Cart = ({ cart, restaurantName, setCart }) => {
   };
 
   return (
-    <div className="cart-container">
-      <h3 className="cart-title">Корзина</h3>
-      <div className="cart-items">
+    <div className="cart-new">
+      <h3 className="cart-title-new">Корзина</h3>
+      
+      <div className="cart-order-title">Ваш заказ</div>
+      
+      <div className="cart-items-new">
         {restaurantCart.length > 0 ? (
           restaurantCart.map((item, index) => (
-            <div className="cart-item" key={index}>
-              <div style={{flex: 1}}>
-                <div className="cart-item-name">{item.name}</div>
-                <div style={{fontSize: '12px', color: '#666', marginTop: '2px'}}>
-                  {item.weight} • {formatPrice(item.price)}
-                </div>
-                <div style={{display: 'flex', alignItems: 'center', gap: '10px', marginTop: '5px'}}>
-                  <button 
-                    onClick={() => updateQuantity(item.name, item.quantity - 1)}
-                    style={{
-                      width: '24px',
-                      height: '24px',
-                      borderRadius: '50%',
-                      border: '1px solid #ddd',
-                      background: 'white',
-                      cursor: 'pointer',
-                      fontSize: '16px'
-                    }}
-                  >-</button>
-                  <span>{item.quantity}</span>
-                  <button 
-                    onClick={() => updateQuantity(item.name, item.quantity + 1)}
-                    style={{
-                      width: '24px',
-                      height: '24px',
-                      borderRadius: '50%',
-                      border: '1px solid #ddd',
-                      background: 'white',
-                      cursor: 'pointer',
-                      fontSize: '16px'
-                    }}
-                  >+</button>
+            <div className="cart-item-new" key={index}>
+              <div className="cart-item-left">
+                <div className="cart-item-name-new">{item.name}</div>
+                <div className="cart-item-details">
+                  <span className="cart-item-weight">{item.weight}</span>
+                  <span className="cart-item-price-new">{formatPrice(item.price)}</span>
                 </div>
               </div>
-              <div>
-                <div className="cart-item-price">{formatPrice(item.price * item.quantity)}</div>
+              <div className="cart-item-right">
+                <div className="cart-item-quantity">
+                  <button 
+                    onClick={() => updateQuantity(item.name, item.quantity - 1)}
+                    className="quantity-btn minus"
+                  >-</button>
+                  <span className="quantity-number">{item.quantity}</span>
+                  <button 
+                    onClick={() => updateQuantity(item.name, item.quantity + 1)}
+                    className="quantity-btn plus"
+                  >+</button>
+                </div>
+                <div className="cart-item-total">
+                  {formatPrice(item.price * item.quantity)}
+                </div>
                 <button 
                   onClick={() => removeFromCart(item.name)}
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    color: '#ff4444',
-                    cursor: 'pointer',
-                    fontSize: '12px',
-                    marginTop: '5px'
-                  }}
+                  className="remove-btn"
                 >
-                  Удалить
+                  <i className="fas fa-trash"></i>
                 </button>
               </div>
             </div>
           ))
         ) : (
-          <div className="empty-cart" style={{textAlign: 'center', padding: '20px', color: '#666'}}>
+          <div className="empty-cart-new">
             Корзина пуста
             <br/>
             <small>Добавьте блюда из меню</small>
@@ -125,32 +108,43 @@ const Cart = ({ cart, restaurantName, setCart }) => {
       
       {restaurantCart.length > 0 && (
         <>
-          <div className="cart-summary">
-            <div className="cart-summary-item">
-              <span>Сумма заказа</span>
-              <span id="cartSubtotal">{formatPrice(subtotal)}</span>
+          <div className="cart-summary-new">
+            <div className="summary-row">
+              <span className="summary-label">Сумма заказа</span>
+              <span className="summary-value" id="cartSubtotal">{formatPrice(subtotal)}</span>
             </div>
-            <div className="cart-summary-item">
-              <span>Скидка</span>
-              <span id="cartDiscount">{discount * 100}%</span>
+            <div className="summary-row">
+              <span className="summary-label">Скидка</span>
+              <span className="summary-value discount" id="cartDiscount">
+                {discount > 0 ? `${discount * 100}%` : '0%'}
+              </span>
             </div>
-            <div className="cart-summary-total">
-              <span>Итого:</span>
-              <span id="cartTotal">{formatPrice(total)}</span>
+            <div className="summary-row total-row">
+              <span className="summary-label">С учетом скидки</span>
+              <span className="summary-value total" id="cartTotal">{formatPrice(total)}</span>
             </div>
           </div>
-          <div className="cart-promo">
+          
+          <div className="cart-promo-new">
             <input 
               type="text" 
-              className="cart-promo-input" 
+              className="cart-promo-input-new" 
               placeholder="Введите промокод" 
               value={promoCode} 
               onChange={(e) => setPromoCode(e.target.value)} 
             />
-            <button className="cart-promo-btn" onClick={applyPromo}>Применить</button>
+            <button className="cart-promo-btn-new" onClick={applyPromo}>Применить</button>
           </div>
-          <div className="cart-final-total">Итого: {formatPrice(total)}</div>
-          <button className="checkout-btn" onClick={checkout}>Оформить заказ</button>
+          
+          <div className="cart-final-total-new">
+            <span>Итого:</span>
+            <span className="final-total-price">{formatPrice(total)}</span>
+          </div>
+          
+          <button className="checkout-btn-new" onClick={checkout}>
+            <i className="fas fa-shopping-cart" style={{marginRight: '10px'}}></i>
+            Оформить заказ
+          </button>
         </>
       )}
     </div>

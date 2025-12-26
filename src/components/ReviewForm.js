@@ -50,7 +50,7 @@ const ReviewForm = ({ restaurants, onSubmit }) => {
       text: ''
     });
     setStars([false, false, false, false, false]);
-    showModal('Спасибо!', 'Ваш отзыв успешно отправлен. Он появится после модерации.');
+    showModal('Успешно.','Отзыв успешно отправлен.');
   };
 
   return (

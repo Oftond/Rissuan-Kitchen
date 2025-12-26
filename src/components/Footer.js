@@ -19,7 +19,6 @@ const Footer = () => {
               <li><Link to="/map">Карта</Link></li>
               <li><Link to="/restaurants">Рестораны</Link></li>
               <li><Link to="/reviews">Отзывы</Link></li>
-              <li><Link to="/about">О нас</Link></li>
             </ul>
           </div>
           <div className="footer-column">

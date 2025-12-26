@@ -44,8 +44,8 @@ export const showModal = (title, message) => {
   
   backdrop.appendChild(modal);
   document.body.appendChild(backdrop);
-  document.body.style.overflow = 'hidden'; 
-
+  document.body.style.overflow = 'hidden';
+  
   document.getElementById('modalClose').onclick = () => {
     document.body.removeChild(backdrop);
     document.body.style.overflow = 'auto';

@@ -10,6 +10,7 @@ const RestaurantTabs = ({ restaurant, addToCart }) => {
 
   const handleAddToCart = (item) => {
     addToCart(item.name, item.price, item.weight, restaurant.name);
+
   };
 
   const renderTabContent = () => {
