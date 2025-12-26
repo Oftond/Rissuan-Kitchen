@@ -22,4 +22,5 @@ WORKDIR app
 COPY --from=build apppublish .
 
 # Запускаем приложение
+
 ENTRYPOINT [dotnet, RussianKitchen.dll]
