@@ -4,9 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace RussianCuisine.Models;
+namespace RussianKitchen.Models;
 
 [Table("Review")]
+[Index("RestaurantId", Name = "idx_review_restaurant_id")]
 public partial class Review
 {
     [Key]

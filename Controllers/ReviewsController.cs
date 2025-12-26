@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RussianCuisine.Data;
-using RussianCuisine.DTOs;
-using RussianCuisine.Models;
+using RussianKitchen.Data;
+using RussianKitchen.DTOs;
+using RussianKitchen.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace RussianCuisine.Controllers
+namespace RussianKitchen.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class ReviewsController : ControllerBase
     {
         private readonly RussianCuisineDbContext _context;
@@ -66,8 +66,8 @@ namespace RussianCuisine.Controllers
                 AuthorName = string.IsNullOrWhiteSpace(dto.AuthorName) ? null : dto.AuthorName,
                 Rating = dto.Rating,
                 Comment = dto.Comment,
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now
             };
 
             _context.Reviews.Add(review);

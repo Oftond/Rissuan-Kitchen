@@ -1,4 +1,4 @@
-﻿namespace RussianCuisine.DTOs
+﻿namespace RussianKitchen.DTOs
 {
     public class ReviewDto
     {

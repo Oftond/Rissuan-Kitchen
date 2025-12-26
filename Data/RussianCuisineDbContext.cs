@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using RussianCuisine.Models;
+using RussianKitchen.Models;
 
-namespace RussianCuisine.Data;
+namespace RussianKitchen.Data;
 
 public partial class RussianCuisineDbContext : DbContext
 {

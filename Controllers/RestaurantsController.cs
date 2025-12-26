@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RussianCuisine.Data;
-using RussianCuisine.DTOs;
+using RussianKitchen.Data;
+using RussianKitchen.DTOs;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace RussianCuisine.Controllers
+namespace RussianKitchen.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class RestaurantsController : ControllerBase
     {
         private readonly RussianCuisineDbContext _context;

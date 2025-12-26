@@ -4,9 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace RussianCuisine.Models;
+namespace RussianKitchen.Models;
 
 [Table("Restaurant")]
+[Index("IsDeleted", Name = "idx_restaurant_is_deleted")]
+[Index("Name", Name = "idx_restaurant_name")]
 public partial class Restaurant
 {
     [Key]

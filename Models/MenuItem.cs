@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace RussianCuisine.Models;
+namespace RussianKitchen.Models;
 
 [Table("MenuItem")]
 public partial class MenuItem
